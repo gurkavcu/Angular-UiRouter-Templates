@@ -19,19 +19,18 @@ angular
             $timeout (->
               deferred.resolve "Hello1!"
               return
-            ), 1000
+            ), 10
             deferred.promise
           greeting2: ($q, $timeout) ->
             deferred = $q.defer()
             $timeout (->
               deferred.resolve "Hello2!"
               return
-            ), 2000
+            ), 20
             deferred.promise      
       )
-      .state('home',
-        url : ""
-        parent : "root"
+      .state('home',        
+        parent: "root"
         templateUrl : "/views/home.html"
         controller: ($scope,greeting1,greeting2)->
           $scope.greeting1 = greeting1          
@@ -39,23 +38,28 @@ angular
       )
       .state('inner1',
         url : "/inner1"
-        parent : "home"
-        templateUrl : "/views/innerhome.html"
+        parent : "home"     
+        views:
+          "container" :
+            templateUrl : "/views/innerhome.html"
       )
       .state('inner2',
         url : "/inner2"
-        parent : "home"
-        templateUrl : "/views/innerhome2.html"
+        parent : "home"     
+        views:
+          "container" :
+            templateUrl : "/views/innerhome2.html"
       )
       .state('sub1',
         url : "/sub1"
-        parent : "inner2"
+        parent : "inner2"     
         views :
           A:
             templateUrl : "/views/a.html"
           B:
             templateUrl : "/views/b.html"
       )
+     
 
 
 
